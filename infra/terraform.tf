@@ -6,9 +6,18 @@ terraform {
       source  = "hashicorp/aws"
     }
   }
+
+  backend "s3" {
+    bucket = "llm-streaming"
+    key = "terraform-state/teraform.tfstate"
+    region = "us-east-1"
+    profile = "default"
+
+  }
 }
 
 provider "aws" {
   region = "us-east-1"
   profile = "default"
+
 }

@@ -37,7 +37,9 @@ resource "aws_iam_role" "lambda_iam_role" {
       Statement = [
         {
           Action = [
-            "logs:PutLogEvents"
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
           ]
           Effect   = "Allow"
           Resource = "*"

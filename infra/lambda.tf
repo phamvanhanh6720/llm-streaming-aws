@@ -1,17 +1,27 @@
-#resource "aws_lambda_function" "llm-stream-lambda" {
-#    function_name = "llm-stream-lambda"
-#    role = "${aws_iam_role.llm-stream-lambda.arn}"
-#    handler = "index.handler"
-#    runtime = "nodejs6.10"
-#    filename = "llm-stream-lambda.zip"
-#    source_code_hash = "${base64sha256(file("llm-stream-lambda.zip"))}"
-#    timeout = "60"
-#    memory_size = "128"
-#    publish = "true"
-#    environment {
-#        variables = {
-#        "LLM_STREAM_TABLE" = "${aws_dynamodb_table.llm-stream-table.name}"
-#        }
-#    }
-#    depends_on = ["aws_iam_role.llm-stream-lambda"]
+#resource "aws_cloudwatch_log_group" "lambda_log_group" {
+#  name = "/aws/lambda/${var.lambda_function_name}"
+#  retention_in_days = 0
 #}
+
+
+resource "aws_lambda_function" "lambda_llm_stream" {
+  function_name = var.lambda_function_name
+  role          = aws_iam_role.lambda_iam_role.arn
+  environment {
+    variables = {
+      AWS_LWA_INVOKE_MODE = "RESPONSE_STREAM"
+    }
+  }
+  memory_size  = 512
+  image_uri    = var.ecr_image_uri
+  package_type = "Image"
+}
+
+
+resource "aws_lambda_function_url" "lambda_llm_stream_url" {
+  function_name      = aws_lambda_function.lambda_llm_stream.arn
+  authorization_type = "NONE"
+  invoke_mode        = "RESPONSE_STREAM"
+  depends_on = [
+    aws_lambda_function.lambda_llm_stream]
+}

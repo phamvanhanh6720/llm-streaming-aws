@@ -17,3 +17,13 @@ variable "iam_policy_cw_log" {
   description = "The name of the IAM policy to access AWS CloudWatch Logs"
   type        = string
 }
+
+variable "lambda_function_name" {
+  description = "The name of the lambda function"
+  type        = string
+}
+
+variable "ecr_image_uri" {
+  description = "The URI of the ECR image"
+  type        = string
+}
