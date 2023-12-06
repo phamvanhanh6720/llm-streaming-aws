@@ -3,6 +3,6 @@ COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.7.1 /lambda-adapter /opt
 
 WORKDIR /app
 ADD . .
-RUN pip install -r requirements.txt.txt
+RUN pip install -r requirements.txt
 
 CMD ["python", "main.py"]
