@@ -23,7 +23,7 @@ variable "lambda_function_name" {
   type        = string
 }
 
-variable "ecr_image_uri" {
-  description = "The URI of the ECR image"
-  type        = string
+variable "force_image_rebuild" {
+  type    = bool
+  default = false
 }

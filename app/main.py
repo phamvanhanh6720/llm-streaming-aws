@@ -47,7 +47,7 @@ async def bedrock_stream(topic: str):
         'stop_sequences': ['\n\nHuman:']
     })
     response = bedrock.invoke_model_with_response_stream(
-        modelId='anthropic.claude-v2',
+        modelId='anthropic.claude-v2:1',
         body=body
     )
 

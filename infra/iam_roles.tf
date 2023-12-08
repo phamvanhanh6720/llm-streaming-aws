@@ -21,7 +21,7 @@ resource "aws_iam_role" "lambda_iam_role" {
       Statement = [
         {
           Action = [
-            "bedrock: InvokeModelWithResponseStream"
+            "bedrock:InvokeModelWithResponseStream"
           ]
           Effect   = "Allow"
           Resource = "*"
