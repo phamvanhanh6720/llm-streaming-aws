@@ -16,6 +16,8 @@ resource "null_resource" "docker_build_and_push" {
 	    docker push "${aws_ecr_repository.ecr_repository.repository_url}:latest"
 	    EOF
   }
+
+  depends_on = [aws_ecr_repository.ecr_repository]
 }
 
 data "aws_caller_identity" "current" {}

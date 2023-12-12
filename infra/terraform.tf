@@ -8,7 +8,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "llm-streaming"
+    bucket = "llm-streaming-hanhpv-dev"
     key = "terraform-state/teraform.tfstate"
     region = "us-east-1"
     profile = "default"
